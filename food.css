@@ -1,0 +1,103 @@
+h1 {font-family:"latobold"; font-size: 200%; color:#106da8;}
+h2 {font-family:"latolight", Courier, sans-serif;font-size:175%;color:#106da8;}
+h3 {font-family:"latobold", sans-serif; font-size:130%;color:#106da8;}
+h4 {font-family:"latobold", sans-serif;color:#106da8;}
+h5 {font-family:"latoregular", font-size:110%; font-weight:normal; sans-serif;color:#106da8;}
+#mapid {width:100%; height: 450px; padding:10px;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;}
+.headerImage {float:left; padding-right:20px;padding-left:20px;}
+#titlebar {padding:20px;height:auto;}
+#menubar {margin-top:20px;border-top: solid 1px #7abcd1; padding:5px 20px 5px 20px;}
+#pagewrap {width:100%;}
+#artTableHolder{width:100%;border-top: solid 1px #7abcd1;}
+#buttonbar{text-align:right;width:100%}
+.selectorclass {float:left;padding:10px;color:#106da8;margin:0;margin-top:-10px;}
+
+#bottombar{font-family:"latobold"; font-size:90%; text-transform:uppercase; padding: 20px; border-top: solid 1px #7abcd1; }
+
+
+ul {list-style-type:none;font-size:90%;padding-top:0;margin-left:0; padding-left:0;}
+li {line-height:1.5em;list-style-type:none}
+
+
+.header{width:100%;}
+.headerPic {width:100px;}
+.artPod {height:auto; width:100%; padding:10px;}
+.imgcontainer{width:275px;float:left;}
+.siteimgcontainer{width:300px;float:right;margin-top:-10px}
+.regularTitle{padding:10px;}
+.mobileTitle{padding:10px;}
+.artistDesc{padding:10px;width:90%}
+.siteHighlight{padding:10px;padding-left:0}
+.artistPic {width:200px; padding:5px;padding-bottom:15px;}
+.spacer {width:100%; border-style:none none solid none; border-width: 5px; border-color: #ddd;}
+.innerspacer {width:100%; border-style:none;}
+.locationheader{margin-top:-20px}
+
+.siteFlag {padding:4px; font-family:'latobold'; float:right; line-height:110%; background-color:#fe019a; color:#fff;z-index:999;border-radius:3px;}
+
+.sitePod {height:auto; width:75%; margin-left:15%; margin-right:15%; padding-bottom:15px; border-bottom:solid 1px #7abcd1;}
+.sitePic {width:300px; padding:20px;}
+.siteDesc {padding:10px;width:90%;margin-top:-20px;}
+
+.artistPodSmall{width:200px;height:240px;overflow-y:hidden;padding:10px;overflow-x:hidden;float:left;border: solid 2px #eee}
+.artistPodSmall h3 {color:#444}
+
+.imgcontainersmall{height:180px;width:180px;overflow:hidden;}
+.artistPicSmall{width:180px;}
+
+.maplink {float:left;padding-right:20px;padding-left:0;color:#ff0066}
+
+.titleSmall{}
+#sponsorbar{width:20%;float:right;height:500px;}
+#infoSpace{padding-left:20%;width:50%;padding-top:20px;}
+
+.subhead {margin-top:-10px;}
+
+
+body {font-family:"latoregular"; font-size:17px; line-height:1.6; padding-left:20px;padding-right:20px;background-color:#fff}
+
+.toggle-button { background-color:#fff; font-family:"latoregular";border: solid 1px #7abcd1; border-radius:5px;}
+.toggle-button {text-transform:uppercase;padding:4px;font-size:110%;margin-bottom:10px;color:#7abcd1;border solid 1px #7abcd1;}
+.toggle-button:hover {background-color:#72c4fa;color:#fff;}
+.toggle-button:active {border:solid 1px #72c4fa}
+
+.categorytitle{cursor:pointer; margin-left:-7px; padding: 3px 10px 3px 10px; margin-bottom:10px;}
+.siteTitle{
+	cursor:pointer;
+	z-index:999;
+}
+
+@media screen and (min-width: 600px) {
+	.mobileTitle {display:none}
+	.regularTitle{display:block}
+}
+
+@media screen and (max-width: 600px) {
+	.selectorclass {float:left; padding:10px;color:#106da8;width:50%};	
+	#mapid{height:300px;}
+	h1{font-size:130%}
+	h2{font-size:120%}
+	h3{font-size:110%;color:#444}
+	h4{font-size:105%}
+	body {font-size:90%}
+	.headerPic{width:70px}
+	.headerImage{width:72px;padding-left:5px;}
+	.regularTitle{display:none}
+	.imgcontainer{width:90%}
+	.siteimgcontainer {width:100%;float:none;padding-left:10;}
+.sitePod(margin-left:0; margin-right:0; padding-left:10px; padding-right:10px; width:auto}
+	  .artistPic {width:80%}
+	  .sitePic {width:90%;height:auto;padding:10;padding-left:5;}
+	  .artistPodSmall{width:90%;height:auto;}
+	  .imgcontainersmall{height:auto;width:90%;overflow:hidden;}
+		.artistPicSmall{width:100%;height:auto;}
+	  .mobileTitle{display:block; width:90%}
+		.maplink{float:right;padding-right:0;padding-left:20px;}
+	.menubar{margin-top:0;}
+	 button{font-size:110%;margin-top:15px;}
+	#infoSpace{width:100%;padding-left:20px;padding-top:20px;padding-left:10px;padding-bottom:20px;}
+	#sponsorBar{width:auto} 
+	#mapid{height:250px;}
+	.locationheader{padding-top:10px}
+
+}
