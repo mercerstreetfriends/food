@@ -102,6 +102,7 @@ function mapToggle(){
 		document.getElementById("mapid").style.display = 'none';
 		mapOn = 0;
 		document.getElementById("mapclose").innerHTML = 'SHOW MAP';
+		
 	}
 	
 	else {
@@ -110,6 +111,7 @@ function mapToggle(){
 		document.getElementById("mapclose").innerHTML = 'HIDE MAP';
 	}
 	mappie.invalidateSize();
+	
 }
 
 function filterToggle(){
@@ -185,7 +187,6 @@ legend.addTo(mappie);
 
 function visibleListings() {
 var visiList = [];
-console.log(displayedDirectory);
 
    for (i in dotGroup._layers) {
 	latlng = dotGroup._layers[i]._latlng;
@@ -194,14 +195,15 @@ console.log(displayedDirectory);
 		visiList.push(id);
 		}
 	}
-console.log(visiList);
 
+	if (mapOn == 1) {
 	for (j in displayedDirectory) {
 		document.getElementById("listing"+j).style.display = 'none';
 	}
    
 	for (k in visiList) {
 		document.getElementById("listing"+visiList[k]).style.display = 'block';
+	}
 	}
    
 }
@@ -524,6 +526,7 @@ function pullUniques(){
 
 </body>
 </html>
+
 
 
 
