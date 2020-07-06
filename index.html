@@ -159,11 +159,11 @@ dotGroup.addTo(mappie);
     ]
   }).addTo(mappie);
 
-/*
+
 mappie.on('moveend', function(e) {
 	visibleListings();
 });
-*/
+
 
 /* legend */
 
@@ -201,7 +201,7 @@ console.log(visiList);
 	}
    
 	for (k in visiList) {
-		document.getElementById("listing"+k).style.display = 'block';
+		document.getElementById("listing"+visiList[k]).style.display = 'block';
 	}
    
 }
@@ -524,5 +524,6 @@ function pullUniques(){
 
 </body>
 </html>
+
 
 
