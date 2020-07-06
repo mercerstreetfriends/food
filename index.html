@@ -274,6 +274,7 @@ const options = {
 
 function freeFuseSearch() {
   selectedSites = [];
+  var numchecks = $("input[type=checkbox]:checked").length;
   val = document.querySelector('#freesearch').value;
 	const fuse = new Fuse(cleanArray, options);
 	searchedSites = fuse.search(val);
@@ -282,7 +283,12 @@ function freeFuseSearch() {
 		selectedSites.push(siteDeets);
 	}
 
-	buildMap(selectedSites, 1);
+	if ((document.querySelector('#freesearch').value == '')&&(numchecks == 0)) {
+		buildMap(cleanArray,0);
+		}
+	else {
+		buildMap(selectedSites, 1);
+	}
 
 }
 
