@@ -1,8 +1,8 @@
-h1 {font-family:"latobold"; font-size: 200%; color:#106da8;}
-h2 {font-family:"latolight", Courier, sans-serif;font-size:175%;color:#106da8;}
-h3 {font-family:"latobold", sans-serif; font-size:130%;color:#106da8;}
+h1 {font-family:"latobold"; font-size: 150%; color:#106da8;}
+h2 {font-family:"latolight", Courier, sans-serif;font-size:130%;color:#106da8;}
+h3 {font-family:"latobold", sans-serif; font-size:110%;color:#106da8;}
 h4 {font-family:"latobold", sans-serif;color:#106da8;}
-h5 {font-family:"latoregular", font-size:110%; font-weight:normal; sans-serif;color:#106da8;}
+h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;color:#106da8;}
 #mapid {width:100%; height: 450px; padding:10px;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;}
 .headerImage {float:left; padding-right:20px;padding-left:20px;}
 #titlebar {padding:20px;height:auto;}
@@ -12,6 +12,7 @@ h5 {font-family:"latoregular", font-size:110%; font-weight:normal; sans-serif;co
 #buttonbar{text-align:right;width:100%}
 .selectorclass {float:left;padding:10px;color:#106da8;margin:0;margin-top:-10px;}
 
+#searchbar{float:right; margin-bottom:10px; padding-bottom:10px;}
 #bottombar{font-family:"latobold"; font-size:90%; text-transform:uppercase; padding: 20px; border-top: solid 1px #7abcd1; }
 
 
@@ -54,7 +55,7 @@ li {line-height:1.5em;list-style-type:none}
 .subhead {margin-top:-10px;}
 
 
-body {font-family:"latoregular"; font-size:17px; line-height:1.6; padding-left:20px;padding-right:20px;background-color:#fff}
+body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:20px;padding-right:20px;background-color:#fff}
 
 .toggle-button { background-color:#fff; font-family:"latoregular";border: solid 1px #7abcd1; border-radius:5px;}
 .toggle-button {text-transform:uppercase;padding:4px;font-size:110%;margin-bottom:10px;color:#7abcd1;border solid 1px #7abcd1;}
@@ -72,7 +73,23 @@ body {font-family:"latoregular"; font-size:17px; line-height:1.6; padding-left:2
 	.regularTitle{display:block}
 }
 
+.legend {
+    line-height: 18px;
+    color: #555;
+	background-color:#fff;
+	padding:5px;
+}
+.legend i {
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+	border-radius:10px;
+}
+
 @media screen and (max-width: 600px) {
+	#searchbar{margin-bottom:10px; padding-bottom:10px;width:100%}
 	.selectorclass {float:left; padding:10px;color:#106da8;width:50%};	
 	#mapid{height:300px;}
 	h1{font-size:130%}
