@@ -15,6 +15,7 @@ h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;co
 #searchbar{float:right; margin-bottom:10px; padding-bottom:10px;}
 #bottombar{font-family:"latobold"; font-size:90%; text-transform:uppercase; padding: 20px; border-top: solid 1px #7abcd1; }
 
+	a {font-family:"latobold"; color:#0033cc; text-decoration:none;} 
 
 ul {list-style-type:none;font-size:90%;padding-top:0;margin-left:0; padding-left:0;}
 li {line-height:1.5em;list-style-type:none}
@@ -118,3 +119,4 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	.locationheader{padding-top:10px}
 
 }
+
