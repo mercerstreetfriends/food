@@ -184,8 +184,26 @@ legend.addTo(mappie);
 
 
 function visibleListings() {
-   var bounds = mappie.getBounds();
-   console.log(bounds);
+var visiList = [];
+console.log(displayedDirectory);
+
+   for (i in dotGroup._layers) {
+	latlng = dotGroup._layers[i]._latlng;
+	id = dotGroup._layers[i].id;
+	if (mappie.getBounds().contains(latlng)) {
+		visiList.push(id);
+		}
+	}
+console.log(visiList);
+
+	for (j in displayedDirectory) {
+		document.getElementById("listing"+j).style.display = 'none';
+	}
+   
+	for (k in visiList) {
+		document.getElementById("listing"+k).style.display = 'block';
+	}
+   
 }
 
 function setUpClean(data, key) {
@@ -373,10 +391,14 @@ function setDisplays() {
 }
 
 function getSelectedVariables(){
+	var numchecks = $("input[type=checkbox]:checked").length;
+
 	var unSelectedSites = [];
 	var selectedSites = [];
 	selectedSiteAllData = [];
 	var carrySelection = [];
+	
+  if (numchecks > 0) {
 	for (i in indexOfVariables) {
 		var thisColumn = [];
 		var set = indexOfVariables[i][1];
@@ -417,6 +439,9 @@ function getSelectedVariables(){
 	}
 
 	buildMap(selectedSiteAllData, 0);
+	}
+	
+	else { buildMap (cleanArray, 0);}
 
 }
 
@@ -499,4 +524,5 @@ function pullUniques(){
 
 </body>
 </html>
+
 
