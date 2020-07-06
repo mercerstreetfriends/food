@@ -30,8 +30,11 @@
     integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
     crossorigin=""></script>
 	
-  <!-- Tabletop to access Google spreadsheets - THANK YOU AMAZING HUMANS WHO CREATED THIS!! I can't believe Google is killing it :-( WEEP!!!-->
+  <!-- Tabletop to access Google spreadsheets - THANK YOU AMAZING HUMANS WHO CREATED THIS!! I can't believe Google is killing it :-( SOB!!! -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+
+<!-- Fuse.js -- thanks, Kiro, you've saved me with so many projects -->	
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.0"></script>	
 	
    
   <link rel="stylesheet" href="css/stylesheet.css">   
@@ -53,9 +56,12 @@
 <div id='buttonbar'>
 <button class='toggle-button' id='mapclose' onclick='mapToggle()'>Show Map</button>
 <button class='toggle-button' id='menuclose' onclick='filterToggle()'>Hide Filters</button>
-<button class='toggle-button' id='showall' onclick='buildMap(cleanArray)'>Show All Sites</button>
+<button class='toggle-button' id='showall' onclick='buildMap(cleanArray, 0)'>Show All Sites</button>
 </div>
 <div id = "menubar">
+<div id ="searchbar"><h4 style='margin:0;text-transform:uppercase;'>Search sites </h4>
+<input name = 'freesearch' id='freesearch' type='text'></input>
+</div>
 <h4 style='margin:0;text-transform:uppercase;'>Filter sites by...</h4>
 </div>
 <div id="spacer"></div>
@@ -88,6 +94,8 @@ var indexOfVariables = [];
 var selectedSites =[];
 var selectedSiteAllData = [];
 var displayedDirectory =[];
+var searchedSites = [];
+
 
 function mapToggle(){
 	if (mapOn !== 0 ) {
@@ -157,6 +165,24 @@ mappie.on('moveend', function(e) {
 });
 */
 
+/* legend */
+
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (mappie) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML +=
+            '<i style="background:#fe019a"></i> ' + ' SUMMER MEALS' + '<br>' +
+			'<i style="background:#900C3F"></i> ' + ' OTHER SITES' + '<br>';
+
+
+    return div;
+};
+
+legend.addTo(mappie);
+
+
 function visibleListings() {
    var bounds = mappie.getBounds();
    console.log(bounds);
@@ -200,7 +226,7 @@ dotGroup.eachLayer(function (layer) {
 
 var latlng = [whichSpot.Latitude, whichSpot.Longitude];
 
-	mappie.setView(latlng, 15);
+	mappie.setView(latlng, 16);
 
 }
 
@@ -217,13 +243,42 @@ function markerClick(e){
 		}
 }
 
-function buildMap(data) {
+<!-- search with Fuse -->
+
+const options = {
+  minMatchCharLength: 3,
+  findAllMatches:false,
+  threshold: 0.3,
+  keys: ['Title', 'Site_Type', 'Location', 'Food', 'Time_of_day', 'Eligibility', 'Description']
+}
+
+function freeFuseSearch() {
+  selectedSites = [];
+  val = document.querySelector('#freesearch').value;
+	const fuse = new Fuse(cleanArray, options);
+	searchedSites = fuse.search(val);
+	for (i in searchedSites) {
+		var siteDeets = searchedSites[i].item;
+		selectedSites.push(siteDeets);
+	}
+
+	buildMap(selectedSites, 1);
+
+}
+
+document.querySelector("#freesearch").addEventListener("change",function () {
+  freeFuseSearch();
+})
+
+
+function buildMap(data, calledbysearch) {
 	document.getElementById("artTableHolder").innerHTML = '';
 	dotGroup.clearLayers(); 
 	
-	/* sorting by Summer Meal Sites then alphabetical */
-	
-	data = data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || d3.ascending(a.Title, b.Title));
+	/* sorting by Summer Meal Sites then alphabetical UNLESS there is a specific thing searched in searchbox */
+	if (calledbysearch !== 1) {
+		data = data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || d3.ascending(a.Title, b.Title));
+	}
 	
 	displayedDirectory = data;
 	for (i in data) {
@@ -278,14 +333,14 @@ function buildMap(data) {
 			"<br><br>" + 
 			spot.Description + 
 						"<br><br>" + 
-			"<b>Eligibility: </b>" + spot.Eligibility + "<br>" +
+			"<b>People served: </b>" + spot.Eligibility + "<br>" +
 			"<b>Food available: </b>" + spot.Food + "<br>" +
 			"<b>Time of day: </b>" + spot.Time_of_day + "<br>" ;
 		}	
 		else { listing = 
 						spot.Description + 
 						"<br><br>" + 
-			"<b>Eligibility: </b>" + spot.Eligibility + "<br>" +
+			"<b>This site serves: </b>" + spot.Eligibility + "<br>" +
 			"<b>Food available: </b>" + spot.Food + "<br>" +
 			"<b>Time of day: </b>" + spot.Time_of_day + "<br>" ;
 			}
@@ -312,7 +367,7 @@ function addDays() {
 function setDisplays() {
    cleanArray = setUpClean(rawArrayData, it => it.Title);
    addDays();
-   buildMap(cleanArray);
+   buildMap(cleanArray, 0);
       pullUniques();
   
 }
@@ -338,8 +393,7 @@ function getSelectedVariables(){
 			selectedSites.push(thisColumn);	
 		}
 	}
-	
-	console.log(selectedSites.length);
+
 	if (selectedSites.length > 1) {
 		for (i =0; i<= selectedSites.length-2; i++){
 			carrySelection  = selectedSites[i].filter(function(val) {
@@ -362,8 +416,7 @@ function getSelectedVariables(){
 		}
 	}
 
-//	console.log(selectedSiteAllData);
-	buildMap(selectedSiteAllData);
+	buildMap(selectedSiteAllData, 0);
 
 }
 
@@ -415,7 +468,7 @@ function pullUniques(){
 		indexOfVariables.push([food, "Food offered","Food"]);
 		
 	eligibility = [...new Set(cleanArray.map(x=>x.Eligibility))].sort(d3.ascending); 
-		indexOfVariables.push([eligibility, "Eligibility", "Eligibility"]);
+		indexOfVariables.push([eligibility, "People served", "Eligibility"]);
 		
 	setUpClickers();
 	
@@ -446,3 +499,4 @@ function pullUniques(){
 
 </body>
 </html>
+
