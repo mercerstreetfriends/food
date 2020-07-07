@@ -284,22 +284,27 @@ const options = {
 }
 
 function freeFuseSearch() {
+	
   selectedSites = [];
   searchedSitesFull = [];
   var numchecks = $("input[type=checkbox]:checked").length;
   val = document.querySelector('#freesearch').value;
+  console.log(val.length);
+	
 	const fuse = new Fuse(cleanArray, options);
 	searchedSites = fuse.search(val);
+	
 	for (i in searchedSites) {
 		var siteDeets = searchedSites[i].item;
 		searchedSitesFull.push(siteDeets);
 	}
 
-	if ((document.querySelector('#freesearch').value == '')&&(numchecks == 0)) {
+	if ((val.length == 0)&&(numchecks == 0)) {
 		cleanArray = sortSiteListing(cleanArray);
 		buildMap(cleanArray,0);
 		}
-	else {
+	else if (val.length >0) {
+		console.log(val);
 		buildMap(searchedSitesFull, 1);
 	}
   getSelectedVariables();
@@ -406,6 +411,7 @@ function buildMap(data, calledbysearch) {
 	
 	dotGroup.on('click', function(e) {markerClick(e)});
 	bounds = dotGroup.getBounds();
+	console.log(bounds);
 	mappie.fitBounds(bounds);
 }
 
@@ -431,7 +437,9 @@ function getSelectedVariables(){
 	var numchecks = $("input[type=checkbox]:checked").length;
 	var useArray = [];
 	
-	if (document.querySelector('#freesearch').value !== '') {
+	console.log(searchedSitesFull.length);
+	
+	if (searchedSitesFull.length>0) {
 		useArray = searchedSitesFull;
 	}
 	
