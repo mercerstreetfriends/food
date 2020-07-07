@@ -126,12 +126,14 @@ function mapToggle(){
 
 function filterToggle(){
 	console.log(document.getElementById("menubar").style.display);
-	if (document.getElementById("menubar").style.display == '') {
+	if (filterOn != 1) {
 		document.getElementById("menubar").style.display = 'block';
+		filterOn =1;
 	}
 	
-	else if (document.getElementById("menubar").style.display == 'block'){
-		document.getElementById("menubar").style.display = '';
+	else {
+		document.getElementById("menubar").style.display = 'none';
+		filterOn = 0;
 	}
 }
 
@@ -561,3 +563,4 @@ function pullUniques(){
 
 </body>
 </html>
+
