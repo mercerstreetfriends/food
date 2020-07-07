@@ -55,7 +55,7 @@
 </div>
 <div id='buttonbar'>
 <button class='toggle-button' id='mapclose' onclick='mapToggle()'>Show Map</button>
-<button class='toggle-button' id='menuclose' onclick='filterToggle()'>Hide Filters</button>
+<button class='toggle-button' id='menuclose' onclick='filterToggle()'>Show/Hide Search</button>
 <button class='toggle-button' id='showall' onclick='buildMap(cleanArray, 0)'>Show All Sites</button>
 </div>
 <div id = "menubar">
@@ -125,16 +125,13 @@ function mapToggle(){
 
 
 function filterToggle(){
-	if (filterOn !== 0 ) {
-		document.getElementById("menubar").style.display = 'none';
-		filterOn = 0;
-		document.getElementById("menuclose").innerHTML = 'SHOW FILTERS';
+	console.log(document.getElementById("menubar").style.display);
+	if (document.getElementById("menubar").style.display == '') {
+		document.getElementById("menubar").style.display = 'block';
 	}
 	
-	else {
-		document.getElementById("menubar").style.display = 'block';
-		filterOn = 1;
-		document.getElementById("menuclose").innerHTML = 'HIDE FILTERS';
+	else if (document.getElementById("menubar").style.display == 'block'){
+		document.getElementById("menubar").style.display = '';
 	}
 }
 
@@ -347,7 +344,7 @@ function buildMap(data, calledbysearch) {
 
 		var siteHeader = 
 					"<h3>" + spot.Title + "</h3>" +
-			"<h4 style='margin-top:-20px;'>" + spot.Location + "</h4>" +
+			"<h4 class = 'siteSubhead'>" + spot.Location + "</h4>" +
 			"<div style='color:#106da8; margin-top:-18px;padding-bottom:20px;'>" + spot.Contact + "</div>" ;
 		
 		xTitle.innerHTML = siteHeader;
@@ -357,6 +354,10 @@ function buildMap(data, calledbysearch) {
 			sumSite.setAttribute('class','siteFlag');
 			sumSite.innerHTML = ' SUMMER MEALS ';
 			listingDiv.appendChild(sumSite);
+			
+			var sumDot = document.createElement('div');
+			sumDot.setAttribute('class','siteDot');
+			listingDiv.appendChild(sumDot);
 		}
 		
 		if (spot.Single_Day !== '') {
@@ -365,6 +366,10 @@ function buildMap(data, calledbysearch) {
 			singleDaySite.setAttribute('style','background-color:#ffff00;color:#000;');
 			singleDaySite.innerHTML = ' EVENT ';
 			listingDiv.appendChild(singleDaySite);
+			var singleDayDot = document.createElement('div');
+			singleDayDot.setAttribute('class','siteDot');
+			singleDayDot.setAttribute('style','background-color:#ffff00;');
+			listingDiv.appendChild(singleDayDot);
 		}		
 
 		listingDiv.appendChild(xTitle);	
@@ -556,4 +561,3 @@ function pullUniques(){
 
 </body>
 </html>
-
