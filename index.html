@@ -488,6 +488,489 @@ function setUpClickers() {
 			.text(indexOfVariables[i][1])
 			.attr("style", "text-transform:uppercase")
 			.attr("class", "categorytitle")
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>TRENTON FOOD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="jquery/jquery-1.6.4.min.js"></script>
+
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
+   
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
+  integrity="sha512-xY2smLIHKirD03vHKDJ2u4pqeHA7OQZZ27EjtqmuhDguxiUvdsOuXMwkg16PQrm9cgTmXtoxA6kwr8KBy3cdcw=="
+  crossorigin=""></script>   
+  
+    <!-- Load Esri Leaflet Geocoder from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
+    integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+    crossorigin="">
+  <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
+    integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
+    crossorigin=""></script>
+	
+  <!-- Tabletop to access Google spreadsheets - THANK YOU AMAZING HUMANS WHO CREATED THIS!! I can't believe Google is killing it :-( SOB!!! -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+
+<!-- Fuse.js -- thanks, Kiro, you've saved me with so many projects -->	
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.0"></script>	
+	
+   
+  <link rel="stylesheet" href="css/stylesheet.css">   
+  <link rel="stylesheet" href="food.css">
+
+
+<style>
+		
+</style>
+
+</head>				
+	
+<body>
+<div id="page-wrap">
+<div name="titlebar">
+<h1>Trenton Area Meal Sites and Food Services</h1>
+<a target = 'blank' href ='https://calendar.google.com/calendar/b/2/embed?src=c3RsdWZ2Zjc1M2IyMnVkcTdvc290YXFyNzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp&mode=AGENDA'>View as a Google Calendar</a>
+</div>
+<div id='buttonbar'>
+<button class='toggle-button' id='mapclose' onclick='mapToggle()'>Show Map</button>
+<button class='toggle-button' id='menuclose' onclick='filterToggle()'>Hide Filters</button>
+<button class='toggle-button' id='showall' onclick='buildMap(cleanArray, 0)'>Show All Sites</button>
+</div>
+<div id = "menubar">
+<div id ="searchbar"><h4 style='margin:0;text-transform:uppercase;'>Search sites </h4>
+<input name = 'freesearch' id='freesearch' type='text'></input>
+</div>
+<h4 style='margin:0;text-transform:uppercase;'>Filter sites by...</h4>
+</div>
+<div id="spacer"></div>
+<div id="mapcontainer">
+<div id="mapid" style = 'display:none'></div>
+</div>
+
+<div id="artTableHolder" style="height:100%; overflow-y:auto;padding-top:5px;">
+</div>
+</div>
+
+<script type="text/javascript" src="d3.min.js"></script>
+<script type="text/javascript">
+
+var mapOn = 0;
+var filterOn = 1;
+var rawData;
+var rawArrayData;
+var cleanArray=[];
+var whichDot;
+var dotGroup = new L.featureGroup();
+var hiliteGroup = new L.featureGroup();
+var hiddenListings=[];
+var eligibility=[];
+var days=[];
+var food=[];
+var sitetypes = [];
+var times =[];
+var indexOfVariables = [];
+var selectedSites =[];
+var selectedSiteAllData = [];
+var displayedDirectory =[];
+var searchedSites = [];
+var searchedSitesFull = [];
+
+
+function mapToggle(){
+	if (mapOn !== 0 ) {
+		document.getElementById("mapid").style.display = 'none';
+		mapOn = 0;
+		document.getElementById("mapclose").innerHTML = 'SHOW MAP';
+		
+	}
+	
+	else {
+		document.getElementById("mapid").style.display = 'block';
+		mapOn = 1;
+		document.getElementById("mapclose").innerHTML = 'HIDE MAP';
+	}
+mappie.invalidateSize();
+	bounds = dotGroup.getBounds();
+	mappie.fitBounds(bounds);
+}
+
+
+function filterToggle(){
+	if (filterOn !== 0 ) {
+		document.getElementById("menubar").style.display = 'none';
+		filterOn = 0;
+		document.getElementById("menuclose").innerHTML = 'SHOW FILTERS';
+	}
+	
+	else {
+		document.getElementById("menubar").style.display = 'block';
+		filterOn = 1;
+		document.getElementById("menuclose").innerHTML = 'HIDE FILTERS';
+	}
+}
+
+function categoryToggle(e) {
+	if (d3.select("#" + e).style("display") == 'block') {
+		d3.select("#" + e).style("display", "none");
+	}
+	else {
+		d3.select("#" + e).style("display", "block");
+	}
+}
+
+
+var mappie = L.map('mapid').setView([40.220028,-74.766263],13);
+
+L.esri.basemapLayer('Topographic');
+mapboxBase = L.tileLayer('https://api.mapbox.com/styles/v1/ixd-maps/cjyi3ti9l08zy1crm4dyjjcm0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaXhkLW1hcHMiLCJhIjoiY2p5aTN0Mzd3MDZkbzNpbnRiMG5uMWJhOSJ9.wV8VsOd5tquU3U-NCnoFQA', {
+	maxZoom:17,
+	attribution: 'iana dikidjieva with mapbox'
+}).addTo(mappie);
+dotGroup.addTo(mappie);
+
+  var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
+
+  L.esri.Geocoding.geosearch({
+    providers: [
+      arcgisOnline,
+      L.esri.Geocoding.mapServiceProvider({
+        label: 'States and Counties',
+        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
+        layers: [2, 3],
+        searchFields: ['NAME', 'STATE_NAME']
+      })
+    ]
+  }).addTo(mappie);
+
+
+mappie.on('moveend', function(e) {
+	visibleListings();
+});
+
+
+/* legend */
+
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (mappie) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML +=
+            '<i style="background:#fe019a"></i> ' + ' SUMMER MEALS' + '<br>' +
+			'<i style="background:#900C3F"></i> ' + ' OTHER SITES' + '<br>';
+
+
+    return div;
+};
+
+legend.addTo(mappie);
+
+
+function visibleListings() {
+var visiList = [];
+
+   for (i in dotGroup._layers) {
+	latlng = dotGroup._layers[i]._latlng;
+	id = dotGroup._layers[i].id;
+	if (mappie.getBounds().contains(latlng)) {
+		visiList.push(id);
+		}
+	}
+
+	if (mapOn == 1) {
+	for (j in displayedDirectory) {
+		document.getElementById("listing"+j).style.display = 'none';
+	}
+   
+	for (k in visiList) {
+		document.getElementById("listing"+visiList[k]).style.display = 'block';
+	}
+	}
+   
+}
+
+function setUpClean(data, key) {
+
+	return [
+		...new Map(
+		data.map(x => [key(x),x])
+		).values()
+	
+	]
+
+}
+
+function markercolor(type) {
+
+switch(type) {
+  case "SUMMER MEAL SITES":
+    return "#fe019a";
+    break;
+
+  default:
+    return "#900C3F";
+}
+
+
+}
+
+function mapFocus(i) {
+whichSpot = displayedDirectory[i];
+
+dotGroup.eachLayer(function (layer) {
+    if (layer.id == i) {
+		layer.openTooltip();
+	}
+
+});
+
+
+var latlng = [whichSpot.Latitude, whichSpot.Longitude];
+
+	mappie.setView(latlng, 16);
+
+}
+
+function markerClick(e){
+		var pos = e.layer.id;
+		for (j in displayedDirectory) {
+		  if (j !== pos) {
+				document.getElementById("listing"+j).style.display = 'none';
+			}
+		  else {
+		  document.getElementById("listing"+j).style.display = 'block';
+		  }
+		  
+		}
+}
+
+<!-- search with Fuse -->
+
+const options = {
+  minMatchCharLength: 3,
+  findAllMatches:false,
+  threshold: 0.3,
+  keys: ['Title', 'Site_Type', 'Location', 'Food', 'Time_of_day', 'Eligibility', 'Description']
+}
+
+function freeFuseSearch() {
+  selectedSites = [];
+  searchedSitesFull = [];
+  var numchecks = $("input[type=checkbox]:checked").length;
+  val = document.querySelector('#freesearch').value;
+	const fuse = new Fuse(cleanArray, options);
+	searchedSites = fuse.search(val);
+	for (i in searchedSites) {
+		var siteDeets = searchedSites[i].item;
+		searchedSitesFull.push(siteDeets);
+	}
+
+	if ((document.querySelector('#freesearch').value == '')&&(numchecks == 0)) {
+		cleanArray = sortSiteListing(cleanArray);
+		buildMap(cleanArray,0);
+		}
+	else {
+		buildMap(searchedSitesFull, 1);
+	}
+  getSelectedVariables();
+}
+
+document.querySelector("#freesearch").addEventListener("change",function () {
+  freeFuseSearch();
+})
+
+function sortSiteListing(data) {
+	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || d3.ascending(a.Title, b.Title));
+}
+
+
+function buildMap(data, calledbysearch) {
+	document.getElementById("artTableHolder").innerHTML = '';
+	dotGroup.clearLayers(); 
+	
+	/* sorting by Summer Meal Sites then alphabetical UNLESS there is a specific thing searched in searchbox */
+	if (calledbysearch !== 1) {
+		data = sortSiteListing(data);
+	}
+	
+	displayedDirectory = data;
+	for (i in data) {
+		var spot = data[i];
+		whichDot = spot;
+
+		var latlng = [spot.Latitude, spot.Longitude];
+		var markerColor = markercolor(spot.Site_Type);
+		var marker = new L.CircleMarker(latlng, {radius: 10, fillColor:markerColor, opacity:1, fillOpacity: 0.8, color:'#fff'});
+		marker.id = i;
+		marker.bindTooltip("<b>"+ spot.Title + "</b><br>" + spot.Location);
+		dotGroup.addLayer(marker);
+		
+		var listingDiv = document.createElement('div');
+		listingDiv.setAttribute('class','sitePod');
+		listingDiv.setAttribute('id','listing'+i);
+		
+		var xTitle = document.createElement('div');
+		xTitle.setAttribute('class','siteTitle');
+		xTitle.setAttribute('id',i);
+		xTitle.setAttribute("onClick","mapFocus(this.id)");
+
+		var siteHeader = 
+					"<h3>" + spot.Title + "</h3>" +
+			"<h4 style='margin-top:-20px;'>" + spot.Location + "</h4>" +
+			"<div style='color:#106da8; margin-top:-18px;padding-bottom:20px;'>" + spot.Contact + "</div>" ;
+		
+		xTitle.innerHTML = siteHeader;
+		
+		if (spot.Site_Type == 'SUMMER MEAL SITES') {
+			var sumSite = document.createElement('div');
+			sumSite.setAttribute('class','siteFlag');
+			sumSite.innerHTML = ' SUMMER MEALS ';
+			listingDiv.appendChild(sumSite);
+		}
+		
+		if (spot.Single_Day !== '') {
+			var singleDaySite = document.createElement('div');
+			singleDaySite.setAttribute('class','siteFlag');
+			singleDaySite.setAttribute('style','background-color:#ffff00;color:#000;');
+			singleDaySite.innerHTML = ' EVENT ';
+			listingDiv.appendChild(singleDaySite);
+		}		
+
+		listingDiv.appendChild(xTitle);	
+		var listing;
+		
+		if (spot.Single_Day !== '') {
+			var slicer = spot.Day.indexOf(" ");
+			var day = spot.Day.substring(0, slicer);
+			listing = 
+			"<b>DATE: " + day + ", " + spot.Single_Day + "<br>" + "TIME: " + spot["Start Time"] + " - " + spot["End Time"] + "</b>" +
+			"<br><br>" + 
+			spot.Description + 
+						"<br><br>" + 
+			"<b>People served: </b>" + spot.Eligibility + "<br>" +
+			"<b>Food available: </b>" + spot.Food + "<br>" +
+			"<b>Time of day: </b>" + spot.Time_of_day + "<br>" ;
+		}	
+		else { listing = 
+						spot.Description + 
+						"<br><br>" + 
+			"<b>This site serves: </b>" + spot.Eligibility + "<br>" +
+			"<b>Food available: </b>" + spot.Food + "<br>" +
+			"<b>Time of day: </b>" + spot.Time_of_day + "<br>" ;
+			}
+		listingDiv.innerHTML += listing;
+		hiddenListings.push(listingDiv);
+		
+				document.getElementById("artTableHolder").appendChild(listingDiv);
+		
+	
+	}
+	
+	dotGroup.on('click', function(e) {markerClick(e)});
+	bounds = dotGroup.getBounds();
+	mappie.fitBounds(bounds);
+}
+
+function addDays() {
+	for (i in rawArrayData) {
+		for (j in cleanArray) {
+			if (rawArrayData[i].Title == cleanArray[j].Title){
+				cleanArray[j].Day += " " + rawArrayData[i].Day;
+			}
+		}
+	}
+}
+
+function setDisplays() {
+   cleanArray = setUpClean(rawArrayData, it => it.Title);
+   addDays();
+   buildMap(cleanArray, 0);
+      pullUniques();
+  
+}
+
+function getSelectedVariables(){
+	var numchecks = $("input[type=checkbox]:checked").length;
+	var useArray = [];
+	
+	if (document.querySelector('#freesearch').value !== '') {
+		useArray = searchedSitesFull;
+	}
+	
+	else {
+		useArray = cleanArray;
+	}
+
+	var unSelectedSites = [];
+	var selectedSites = [];
+	selectedSiteAllData = [];
+	var carrySelection = [];
+	
+  if (numchecks > 0) {
+	for (i in indexOfVariables) {
+		var thisColumn = [];
+		var set = indexOfVariables[i][1];
+		var columnName = indexOfVariables[i][2];
+		$.each($("input[name='" + set + "']:checked"), function(){
+				val = $(this).val();
+                for (j in useArray) {
+					if(useArray[j][columnName].includes(val)==true) {
+						thisColumn.push(useArray[j].Title);
+					};				
+				}
+            });
+		if (thisColumn.length >0) {
+			selectedSites.push(thisColumn);	
+		}
+	}
+
+	var carrySelection = selectedSites.shift().reduce(function(res, v) {
+    if (res.indexOf(v) === -1 && selectedSites.every(function(a) {
+        return a.indexOf(v) !== -1;
+    })) res.push(v);
+    return res;
+		}, []);
+	
+	for (a in cleanArray) {
+		for (b in carrySelection) {
+			if (cleanArray[a].Title == carrySelection[b]) {
+				selectedSiteAllData.push(cleanArray[a]);
+			}
+		}
+	}
+
+	buildMap(selectedSiteAllData, 0);
+	}
+	
+	else { buildMap (useArray, 0);}
+
+}
+
+function setUpClickers() {
+
+	for (i in indexOfVariables) {
+		var headername = "ul" + i;
+		var catBox = "category" + i;
+		d3.select("#menubar").append("ul")
+			.attr("class", "selectorclass")
+			.attr("id", headername);
+			
+		d3.select("#" + headername).append("b")
+			.text(indexOfVariables[i][1])
+			.attr("style", "text-transform:uppercase")
+			.attr("class", "categorytitle")
 			.attr("onClick","categoryToggle('category" + i + "')");
 
 		d3.select("#" + headername).append("div")
