@@ -148,7 +148,9 @@ function categoryToggle(e) {
 }
 
 
-var mappie = L.map('mapid').setView([40.220028,-74.766263],13);
+var mappie = L.map('mapid', {scrollWheelZoom: false}).setView([40.220028,-74.766263],13);
+
+
 
 L.esri.basemapLayer('Topographic');
 mapboxBase = L.tileLayer('https://api.mapbox.com/styles/v1/ixd-maps/cjyi3ti9l08zy1crm4dyjjcm0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaXhkLW1hcHMiLCJhIjoiY2p5aTN0Mzd3MDZkbzNpbnRiMG5uMWJhOSJ9.wV8VsOd5tquU3U-NCnoFQA', {
@@ -554,3 +556,4 @@ function pullUniques(){
 
 </body>
 </html>
+
