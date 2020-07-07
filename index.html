@@ -315,7 +315,7 @@ document.querySelector("#freesearch").addEventListener("change",function () {
 })
 
 function sortSiteListing(data) {
-	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || d3.ascending(a.Title, b.Title));
+	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || (d3.descending(a.Event, b.Event)|| d3.ascending(a.Start, b.Start)) || d3.ascending(a.Title, b.Title));
 }
 
 
@@ -426,7 +426,23 @@ function addDays() {
 }
 
 function setDisplays() {
-   cleanArray = setUpClean(rawArrayData, it => it.Title);
+   titleArray = setUpClean(rawArrayData, it => it.Title);
+   midArray = [];
+   
+   for (i in rawArrayData) {
+	if (rawArrayData[i].Event != '') {
+			midArray.push(rawArrayData[i]);
+		}
+   }
+   
+   titleArray.forEach( function (i) { 
+	if(midArray.indexOf(i) < 0) {
+		midArray.push(i);
+		}
+	});
+	cleanArray = midArray;
+	console.log(cleanArray);
+   
    addDays();
    pullUniques();
  	buildMap(cleanArray, 0);
@@ -571,4 +587,3 @@ function pullUniques(){
 
 </body>
 </html>
-
