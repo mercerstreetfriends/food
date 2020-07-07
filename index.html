@@ -111,9 +111,11 @@ function mapToggle(){
 		mapOn = 1;
 		document.getElementById("mapclose").innerHTML = 'HIDE MAP';
 	}
-	mappie.invalidateSize();
-	
+mappie.invalidateSize();
+	bounds = dotGroup.getBounds();
+	mappie.fitBounds(bounds);
 }
+
 
 function filterToggle(){
 	if (filterOn !== 0 ) {
@@ -317,6 +319,7 @@ function buildMap(data, calledbysearch) {
 	for (i in data) {
 		var spot = data[i];
 		whichDot = spot;
+
 		var latlng = [spot.Latitude, spot.Longitude];
 		var markerColor = markercolor(spot.Site_Type);
 		var marker = new L.CircleMarker(latlng, {radius: 10, fillColor:markerColor, opacity:1, fillOpacity: 0.8, color:'#fff'});
@@ -384,7 +387,10 @@ function buildMap(data, calledbysearch) {
 		
 	
 	}
+	
 	dotGroup.on('click', function(e) {markerClick(e)});
+	bounds = dotGroup.getBounds();
+	mappie.fitBounds(bounds);
 }
 
 function addDays() {
@@ -548,6 +554,5 @@ function pullUniques(){
 
 </body>
 </html>
-
 
 
