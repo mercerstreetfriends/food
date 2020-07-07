@@ -3,7 +3,7 @@ h2 {font-family:"latolight", Courier, sans-serif;font-size:130%;color:#106da8;}
 h3 {font-family:"latobold", sans-serif; font-size:110%;color:#106da8;}
 h4 {font-family:"latobold", sans-serif;color:#106da8;}
 h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;color:#106da8;}
-#mapid {width:100%; height: 350px; padding:10px;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;}
+#mapid {width:100%; height: 350px; padding:0;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;}
 .headerImage {float:left; padding-right:20px;padding-left:20px;}
 #titlebar {padding:20px;height:auto;}
 #menubar {margin-top:20px;border-top: solid 1px #7abcd1; padding:5px 20px 5px 20px;}
@@ -36,6 +36,7 @@ li {line-height:1.5em;list-style-type:none}
 .locationheader{margin-top:-20px}
 
 .siteFlag {padding:4px; font-family:'latobold'; float:right; line-height:110%; background-color:#fe019a; color:#fff;z-index:999;border-radius:3px;}
+.siteDot {float:right;width:15px; height:15px; background-color:#fe019a; border-radius:15px;display:none}
 
 .sitePod {height:auto; width:75%; margin-left:15%; margin-right:15%; padding-bottom:15px; border-bottom:solid 1px #7abcd1;}
 .sitePic {width:300px; padding:20px;}
@@ -93,10 +94,10 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 
 @media screen and (max-width: 600px) {
 	#searchbar{margin-bottom:10px; padding-bottom:10px;width:100%}
-	.selectorclass {float:left; padding:10px;color:#106da8;width:50%};	
+	.selectorclass {float:left; padding:10px;color:#106da8;width:100%};	
 	h1{font-size:130%}
 	h2{font-size:120%}
-	h3{font-size:110%;color:#444}
+	h3{font-size:110%}
 	h4{font-size:105%}
 	body {font-size:90%}
 	.headerPic{width:70px}
@@ -104,7 +105,7 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	.regularTitle{display:none}
 	.imgcontainer{width:90%}
 	.siteimgcontainer {width:100%;float:none;padding-left:10;}
-	.sitePod(height:auto; width:100%; margin-left:0; margin-right:0%; padding:0 px; border-bottom:solid 1px #7abcd1;}
+	.sitePod{height:auto; width:100%; margin-left:0; margin-right:0%; padding:0 px; border-bottom:solid 1px #7abcd1;}
 	  .artistPic {width:80%}
 	  .sitePic {width:90%;height:auto;padding:10;padding-left:5;}
 	  .artistPodSmall{width:90%;height:auto;}
@@ -119,8 +120,12 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	#mapid{height:250px;}
 	#artTableHolder{padding:5px; margin:0;width:100%}
 	.siteFlag{display:none}
+	.siteDot {float:right;width:15px; height:15px; border-radius:15px;display:block}
 	.siteSubhead{margin-top:-5px;}
 	.locationheader{padding-top:10px}
+	.toggle-button { font-size:85%}
+	#buttonbar {text-align:left}
+	#menubar {display:none}
 
 }
 
