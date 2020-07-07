@@ -49,6 +49,8 @@ li {line-height:1.5em;list-style-type:none}
 
 .maplink {float:left;padding-right:20px;padding-left:0;color:#ff0066}
 
+.siteSubhead{ margin-top:-20px; }
+
 .titleSmall{}
 #sponsorbar{width:20%;float:right;height:500px;}
 #infoSpace{padding-left:20%;width:50%;padding-top:20px;}
@@ -92,7 +94,6 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 @media screen and (max-width: 600px) {
 	#searchbar{margin-bottom:10px; padding-bottom:10px;width:100%}
 	.selectorclass {float:left; padding:10px;color:#106da8;width:50%};	
-	#mapid{height:300px;}
 	h1{font-size:130%}
 	h2{font-size:120%}
 	h3{font-size:110%;color:#444}
@@ -103,7 +104,7 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	.regularTitle{display:none}
 	.imgcontainer{width:90%}
 	.siteimgcontainer {width:100%;float:none;padding-left:10;}
-.sitePod(margin-left:0; margin-right:0; padding-left:10px; padding-right:10px; width:auto}
+	.sitePod(height:auto; width:100%; margin-left:0; margin-right:0%; padding:0 px; border-bottom:solid 1px #7abcd1;}
 	  .artistPic {width:80%}
 	  .sitePic {width:90%;height:auto;padding:10;padding-left:5;}
 	  .artistPodSmall{width:90%;height:auto;}
@@ -116,6 +117,10 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	#infoSpace{width:100%;padding-left:20px;padding-top:20px;padding-left:10px;padding-bottom:20px;}
 	#sponsorBar{width:auto} 
 	#mapid{height:250px;}
+	#artTableHolder{padding:5px; margin:0;width:100%}
+	.siteFlag{display:none}
+	.siteSubhead{margin-top:-5px;}
 	.locationheader{padding-top:10px}
 
 }
+
