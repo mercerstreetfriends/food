@@ -125,7 +125,6 @@ function mapToggle(){
 
 
 function filterToggle(){
-	console.log(document.getElementById("menubar").style.display);
 	if (filterOn != 1) {
 		document.getElementById("menubar").style.display = 'block';
 		filterOn =1;
@@ -289,7 +288,6 @@ function freeFuseSearch() {
   searchedSitesFull = [];
   var numchecks = $("input[type=checkbox]:checked").length;
   val = document.querySelector('#freesearch').value;
-  console.log(val.length);
 	
 	const fuse = new Fuse(cleanArray, options);
 	searchedSites = fuse.search(val);
@@ -304,7 +302,6 @@ function freeFuseSearch() {
 		buildMap(cleanArray,0);
 		}
 	else if (val.length >0) {
-		console.log(val);
 		buildMap(searchedSitesFull, 1);
 	}
   getSelectedVariables();
@@ -411,7 +408,6 @@ function buildMap(data, calledbysearch) {
 	
 	dotGroup.on('click', function(e) {markerClick(e)});
 	bounds = dotGroup.getBounds();
-	console.log(bounds);
 	mappie.fitBounds(bounds);
 }
 
@@ -441,7 +437,6 @@ function setDisplays() {
 		}
 	});
 	cleanArray = midArray;
-	console.log(cleanArray);
    
    addDays();
    pullUniques();
@@ -452,8 +447,6 @@ function setDisplays() {
 function getSelectedVariables(){
 	var numchecks = $("input[type=checkbox]:checked").length;
 	var useArray = [];
-	
-	console.log(searchedSitesFull.length);
 	
 	if (searchedSitesFull.length>0) {
 		useArray = searchedSitesFull;
