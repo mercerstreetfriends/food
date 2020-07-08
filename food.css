@@ -101,7 +101,7 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	h4{font-size:105%}
 	body {font-size:90%}
 	.headerPic{width:70px}
-	.headerImage{width:72px;padding-left:5px;}
+	.headerImage{display:none;}
 	.regularTitle{display:none}
 	.imgcontainer{width:90%}
 	.siteimgcontainer {width:100%;float:none;padding-left:10;}
