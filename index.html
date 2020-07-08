@@ -289,7 +289,6 @@ function freeFuseSearch() {
   searchedSitesFull = [];
   var numchecks = $("input[type=checkbox]:checked").length;
   val = document.querySelector('#freesearch').value;
-  console.log(val.length);
 	
 	const fuse = new Fuse(cleanArray, options);
 	searchedSites = fuse.search(val);
@@ -304,7 +303,6 @@ function freeFuseSearch() {
 		buildMap(cleanArray,0);
 		}
 	else if (val.length >0) {
-		console.log(val);
 		buildMap(searchedSitesFull, 1);
 	}
   getSelectedVariables();
