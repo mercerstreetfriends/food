@@ -4,12 +4,12 @@ h3 {font-family:"latobold", sans-serif; font-size:110%;color:#106da8;}
 h4 {font-family:"latobold", sans-serif;color:#106da8;}
 h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;color:#106da8;}
 #mapid {width:100%; height: 350px; padding:0;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;}
-.headerImage {float:left; padding-right:20px;padding-left:20px;}
+.headerImage {float:right; padding-left:20px;height:60px}
 #titlebar {padding:20px;height:auto;}
 #menubar {margin-top:20px;border-top: solid 1px #7abcd1; padding:5px 20px 5px 20px;}
 #pagewrap {width:100%;}
 #artTableHolder{width:100%;border-top: solid 1px #7abcd1;}
-#buttonbar{text-align:right;width:100%}
+#buttonbar{text-align:right;width:100%padding-top:15px;}
 .selectorclass {float:left;padding:10px;color:#106da8;margin:0;margin-top:-10px;}
 
 #searchbar{float:left; margin-bottom:10px; padding-bottom:10px;margin-right:30px;}
@@ -128,4 +128,3 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	#menubar {display:none}
 
 }
-
