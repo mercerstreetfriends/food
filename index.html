@@ -73,6 +73,8 @@ If you see anything that needs to be updated, please contact Matthew Broad at mb
 <div id ="searchbar"><h4 style='margin:0;text-transform:uppercase;'>Search sites </h4>
 <input name = 'freesearch' id='freesearch' type='text'></input>
 </div>
+<div id='clearall' onClick = 'clearAllSearches()'><h4 style='margin:0;text-transform:uppercase;'>Clear all</h4>
+</div>
 <h4 style='margin:0;text-transform:uppercase;'>Filter sites by...</h4>
 </div>
 <div id="spacer"></div>
@@ -205,7 +207,7 @@ var locArray = [];
 			locArray.push(cleanArray[j]);
 		}
 	}
-			console.log(locArray);
+//			console.log(locArray);
 //			console.log(cleanArray);
 	if (locArray.length !== 0) {
 		buildMap(locArray,0);
@@ -491,6 +493,23 @@ function setDisplays() {
  	buildMap(cleanArray, 0);
  
 }
+
+function clearAllSearches() {
+		$.each($("input[type=checkbox]"), function(){
+			this.checked = false;
+		});	
+
+		searchedSitesFull = [];
+		locArray = [];
+		selectedSites = [];
+		unSelectedSites = [];
+		carrySelection = [];
+		displayedDirectory = [];
+		document.querySelector('#freesearch').value = '';
+		buildMap(cleanArray, 0);
+
+}
+
 
 function getSelectedVariables(){
 	var numchecks = $("input[type=checkbox]:checked").length;
