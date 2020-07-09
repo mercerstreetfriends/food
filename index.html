@@ -170,7 +170,7 @@ dotGroup.addTo(mappie);
 
   var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
 
-  L.esri.Geocoding.geosearch({
+var esriSearch = L.esri.Geocoding.geosearch({
     providers: [
       arcgisOnline,
       L.esri.Geocoding.mapServiceProvider({
@@ -179,8 +179,44 @@ dotGroup.addTo(mappie);
         layers: [2, 3],
         searchFields: ['NAME', 'STATE_NAME']
       })
-    ]
-  }).addTo(mappie);
+    ], 	  
+	zoomToResult:false,
+	allowMultipleResults:false,
+	placeholder: 'Enter an address for sites within 1/2 mile'
+   
+  });
+  
+var geoSearchResults = L.layerGroup().addTo(mappie);  
+var locArray = [];  
+  
+  esriSearch.on('results', function (data) {
+	locArray = [];
+    geoSearchResults.clearLayers();
+    for (var i = data.results.length - 1; i >= 0; i--) {
+//      geoSearchResults.addLayer(L.marker(data.results[i].latlng));
+    }
+	var centerLatLng = data.latlng;
+	
+	for (j in cleanArray){
+	var lat = cleanArray[j].Latitude;
+	var lng = cleanArray[j].Longitude;
+		latlng = L.latLng(lat,lng);
+		if (centerLatLng.distanceTo(latlng) <=700) {
+			locArray.push(cleanArray[j]);
+		}
+	}
+			console.log(locArray);
+//			console.log(cleanArray);
+	if (locArray.length !== 0) {
+		buildMap(locArray,0);
+	}
+  });
+  
+  esriSearch.addTo(mappie);
+
+if (esriSearch._ResultsEvent) {
+	console.log(esriSearch.results);
+}
 
 
 mappie.on('moveend', function(e) {
@@ -328,6 +364,7 @@ function sortSiteListing(data) {
 
 
 function buildMap(data, calledbysearch) {
+	console.log(data);
 	document.getElementById("artTableHolder").innerHTML = '';
 	dotGroup.clearLayers(); 
 	
