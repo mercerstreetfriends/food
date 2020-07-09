@@ -216,10 +216,6 @@ var locArray = [];
   
   esriSearch.addTo(mappie);
 
-if (esriSearch._ResultsEvent) {
-	console.log(esriSearch.results);
-}
-
 
 mappie.on('moveend', function(e) {
 	visibleListings();
@@ -366,7 +362,6 @@ function sortSiteListing(data) {
 
 
 function buildMap(data, calledbysearch) {
-	console.log(data);
 	document.getElementById("artTableHolder").innerHTML = '';
 	dotGroup.clearLayers(); 
 	
