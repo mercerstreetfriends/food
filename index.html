@@ -193,6 +193,7 @@ var locArray = [];
   
   esriSearch.on('results', function (data) {
 	locArray = [];
+	displayedDirectory = [];
     geoSearchResults.clearLayers();
     for (var i = data.results.length - 1; i >= 0; i--) {
 //      geoSearchResults.addLayer(L.marker(data.results[i].latlng));
@@ -324,7 +325,7 @@ const options = {
   minMatchCharLength: 4,
   findAllMatches:false,
   threshold: 0.4,
-  keys: ['Title', 'Site_Type', 'Location', 'Food', 'Time_of_day', 'Eligibility', 'Event', 'Description']
+  keys: ['Title', 'Site_Type', 'Location', 'Food', 'Time_of_day', 'Eligibility', 'Event', 'Description', 'Contact']
 }
 
 function freeFuseSearch() {
