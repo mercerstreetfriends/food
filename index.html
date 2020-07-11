@@ -162,7 +162,7 @@ function categoryToggle(e) {
 }
 
 
-var mappie = L.map('mapid', {scrollWheelZoom: false}).setView([40.220028,-74.766263],13);
+const mappie = L.map('mapid', {scrollWheelZoom: false}).setView([40.220028,-74.766263],13);
 
 
 
@@ -363,6 +363,21 @@ document.querySelector("#freesearch").addEventListener("change",function () {
 function sortSiteListing(data) {
 	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || (d3.descending(a.Event, b.Event)|| d3.ascending(a.Start, b.Start)) || d3.ascending(a.Title, b.Title));
 }
+
+mappie.on('zoomend', function () {
+	var currZoom = mappie.getZoom();
+//	console.log(currZoom);
+	if (currZoom < 13) {
+		for (i in dotGroup._layers) {
+			dotGroup._layers[i].setRadius(7);
+		}
+	}
+	else {
+		for (i in dotGroup._layers) {
+			dotGroup._layers[i].setRadius(10);
+		}
+	}
+});
 
 
 function buildMap(data, calledbysearch) {
