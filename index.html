@@ -19,6 +19,10 @@
  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
    integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
    crossorigin=""></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86606503-3"></script>
+
    
   <!-- Load Esri Leaflet from CDN -->
   <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
@@ -51,6 +55,14 @@
 </head>				
 	
 <body>
+	
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-86606503-3');
+</script>
+	
 <div id="page-wrap">
 <div name="titlebar">
 <a target='blank' href='https://trentonhealthteam.org/'><img class="headerImage" src="TrentonHealthTeam.jpg"></a>
