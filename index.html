@@ -377,7 +377,7 @@ document.querySelector("#freesearch").addEventListener("change",function () {
 })
 
 function sortSiteListing(data) {
-	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || (d3.descending(a.Event, b.Event)|| d3.ascending(a.Start, b.Start)) || d3.ascending(a.Title, b.Title));
+	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || (d3.descending(a.Single_Day, b.Single_Day)|| d3.ascending(a.Start, b.Start)) || d3.ascending(a.Title, b.Title));
 }
 
 mappie.on('zoomend', function () {
@@ -509,8 +509,9 @@ function setDisplays() {
 	if (rawArrayData[i].Event != '') {
 		if (rawArrayData[i].Event == 'Event') {
 			var datecomp = new Date(rawArrayData[i].Start);
-			
+		//	console.log(today, datecomp);
 			if (today < datecomp) {
+				console.log(rawArrayData[i].Start, rawArrayData[i].Title, rawArrayData[i].Event);
 				midArray.push(rawArrayData[i]);
 				}
 			}
@@ -522,7 +523,13 @@ function setDisplays() {
    
    titleArray.forEach( function (i) { 
 	if(midArray.indexOf(i) < 0) {
-		midArray.push(i);
+		var datecomp = new Date(i.Start);
+		if ((i.Event == "Event") && (today < datecomp)) {
+			midArray.push(i);
+		}
+		else if (i.Event !== "Event") {
+			midArray.push(i);
+			}
 		}
 	});
 	cleanArray = midArray;
