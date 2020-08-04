@@ -594,6 +594,7 @@ function getSelectedVariables(){
 		if (thisColumn.length >0) {
 			selectedSites.push(thisColumn);	
 		}
+		console.log(thisColumn);
 	}
 
 	var carrySelection = selectedSites.shift().reduce(function(res, v) {
@@ -659,8 +660,9 @@ function pullUniques(){
 	days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 		indexOfVariables.push([days, "Days", "Day"]); 
 		
-	times = ["Morning", "Midday", "Afternoon", "Evening"];
+	times = ["Morning", "Midday", "Afternoon", "Evening", "24 Hours"];
 		indexOfVariables.push([times, "Times of Day", "Time_of_day"]);
+		console.log(indexOfVariables);
 		
 	food = ["Meals - grab & go", "Pantry items"];
 		indexOfVariables.push([food, "Food offered","Food"]);
