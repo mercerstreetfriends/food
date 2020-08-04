@@ -6,6 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="jquery/jquery-1.6.4.min.js"></script>
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86606503-3"></script>
+
 <!-- THT favicon -->
 <link rel="icon" href="https://1t9ujr36h40kqq4wd2pa3xu1-wpengine.netdna-ssl.com/wp-content/uploads/2019/09/favicon.png" sizes="32x32" /><link rel="icon" href="https://1t9ujr36h40kqq4wd2pa3xu1-wpengine.netdna-ssl.com/wp-content/uploads/2019/09/favicon.png" sizes="192x192" /><link rel="apple-touch-icon" href="https://1t9ujr36h40kqq4wd2pa3xu1-wpengine.netdna-ssl.com/wp-content/uploads/2019/09/favicon.png" /><meta name="msapplication-TileImage" content="https://trentonhealthteam.org/wp-content/uploads/2019/09/favicon.png" />
 
@@ -19,10 +22,6 @@
  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
    integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
    crossorigin=""></script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86606503-3"></script>
-
    
   <!-- Load Esri Leaflet from CDN -->
   <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
@@ -43,8 +42,11 @@
 <!-- Fuse.js -- thanks, Kiro, you've saved me with so many projects -->	
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.0"></script>	
 	
-   
+
+<!-- fonts stylesheet -->   
   <link rel="stylesheet" href="css/stylesheet.css">   
+  
+<!-- main stylesheet -->  
   <link rel="stylesheet" href="food.css">
 
 
@@ -55,14 +57,14 @@
 </head>				
 	
 <body>
-	
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'UA-86606503-3');
 </script>
-	
+
 <div id="page-wrap">
 <div name="titlebar">
 <a target='blank' href='https://trentonhealthteam.org/'><img class="headerImage" src="TrentonHealthTeam.jpg"></a>
@@ -125,6 +127,8 @@ var displayedDirectory =[];
 var searchedSites = [];
 var searchedSitesFull = [];
 
+var today = new Date();
+
 
 function mapToggle(){
 
@@ -179,7 +183,7 @@ const mappie = L.map('mapid', {scrollWheelZoom: false}).setView([40.220028,-74.7
 
 
 L.esri.basemapLayer('Topographic');
-mapboxBase = L.tileLayer('https://api.mapbox.com/styles/v1/ixd-maps/cjyi3ti9l08zy1crm4dyjjcm0/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaXhkLW1hcHMiLCJhIjoiY2p5aTN0Mzd3MDZkbzNpbnRiMG5uMWJhOSJ9.wV8VsOd5tquU3U-NCnoFQA', {
+mapboxBase = L.tileLayer('https://api.mapbox.com/styles/v1/ixd-maps/cjzkdbpoy5jn81clijbwfi0xe/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaXhkLW1hcHMiLCJhIjoiY2p5aTNyeDJjMDZiNzNjbzJ3NXg4enBnNyJ9.Pu8sks70-J3xwfXbVYk2rA', {
 	maxZoom:17,
 	attribution: 'iana dikidjieva with mapbox'
 }).addTo(mappie);
@@ -503,7 +507,16 @@ function setDisplays() {
    
    for (i in rawArrayData) {
 	if (rawArrayData[i].Event != '') {
+		if (rawArrayData[i].Event == 'Event') {
+			var datecomp = new Date(rawArrayData[i].Start);
+			
+			if (today < datecomp) {
+				midArray.push(rawArrayData[i]);
+				}
+			}
+		else if (rawArrayData[i].Event !== 'Event'){
 			midArray.push(rawArrayData[i]);
+			}
 		}
    }
    
