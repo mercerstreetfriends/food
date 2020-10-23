@@ -378,7 +378,7 @@ document.querySelector("#freesearch").addEventListener("change",function () {
 })
 
 function sortSiteListing(data) {
-	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || (d3.descending(a.Single_Day, b.Single_Day)|| d3.ascending(a.Start, b.Start)) || d3.ascending(a.Title, b.Title));
+	return data.slice().sort((a, b) => d3.descending(a.Site_Type, b.Site_Type) || d3.descending(a.Single_Day, b.Single_Day)|| d3.ascending(a.Title, b.Title));
 }
 
 mappie.on('zoomend', function () {
@@ -407,6 +407,7 @@ function buildMap(data, calledbysearch) {
 	}
 	
 	displayedDirectory = data;
+	console.log(data);
 	for (i in data) {
 		var spot = data[i];
 		whichDot = spot;
@@ -685,6 +686,7 @@ function pullUniques(){
   function showInfo(data, tabletop) {
    rawData = data["DATA SHEET"];
    rawArrayData = rawData.elements;
+   console.log(rawArrayData);
    setDisplays();
 
 
