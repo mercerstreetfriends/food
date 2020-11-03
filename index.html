@@ -404,10 +404,12 @@ function buildMap(data, calledbysearch) {
 	/* sorting by Summer Meal Sites then alphabetical UNLESS there is a specific thing searched in searchbox */
 	if (calledbysearch !== 1) {
 		data = sortSiteListing(data);
+		console.log(calledbysearch);
+		console.log(sortSiteListing(data));
 	}
 	
 	displayedDirectory = data;
-	console.log(data);
+	//console.log(data);
 	for (i in data) {
 		var spot = data[i];
 		whichDot = spot;
@@ -591,7 +593,7 @@ function getSelectedVariables(){
 					if(useArray[j][columnName].includes(val)==true) {
 						thisColumn.push(useArray[j].Title);
 					};
-					if ((val = '18 and under') && (useArray[j]['Eligibility'].includes('TPS students')==true)) {
+					if ((val == '18 and under') && (useArray[j]['Eligibility'].includes('TPS students')==true)) {
 						thisColumn.push(useArray[j].Title);
 					}
 				}
@@ -705,5 +707,4 @@ function pullUniques(){
   
 
 </body>
-</html>
 </html>
