@@ -251,7 +251,7 @@ legend.onAdd = function (mappie) {
 
     var div = L.DomUtil.create('div', 'info legend');
         div.innerHTML +=
-            '<i style="background:#fe019a"></i> ' + ' SUMMER MEALS' + '<br>' +
+            '<i style="background:#fe019a"></i> ' + ' YOUTH MEALS' + '<br>' +
 			'<i style="background:#900C3F"></i> ' + ' OTHER SITES' + '<br>';
 
 
@@ -298,7 +298,7 @@ function setUpClean(data, key) {
 function markercolor(type) {
 
 switch(type) {
-  case "SUMMER MEAL SITES":
+  case "YOUTH MEALS":
     return "#fe019a";
     break;
 
@@ -435,10 +435,10 @@ function buildMap(data, calledbysearch) {
 		
 		xTitle.innerHTML = siteHeader;
 		
-		if (spot.Site_Type == 'SUMMER MEAL SITES') {
+		if (spot.Site_Type == 'YOUTH MEALS') {
 			var sumSite = document.createElement('div');
 			sumSite.setAttribute('class','siteFlag');
-			sumSite.innerHTML = ' SUMMER MEALS ';
+			sumSite.innerHTML = ' YOUTH MEALS ';
 			listingDiv.appendChild(sumSite);
 			
 			var sumDot = document.createElement('div');
@@ -656,7 +656,7 @@ function setUpClickers() {
 
 
 function pullUniques(){
-	sitetypes = ["SUMMER MEAL SITES", "OTHER"];
+	sitetypes = ["YOUTH MEALS", "OTHER"];
 		indexOfVariables.push([sitetypes, "Site Types", "Site_Type"]);
 	
 	days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
