@@ -590,7 +590,10 @@ function getSelectedVariables(){
                 for (j in useArray) {
 					if(useArray[j][columnName].includes(val)==true) {
 						thisColumn.push(useArray[j].Title);
-					};				
+					};
+					if ((val = '18 and under') && (useArray[j]['Eligibility'].includes('TPS students')==true)) {
+						thisColumn.push(useArray[j].Title);
+					}
 				}
             });
 		if (thisColumn.length >0) {
@@ -670,7 +673,8 @@ function pullUniques(){
 		indexOfVariables.push([food, "Food offered","Food"]);
 		
 	eligibility = [...new Set(cleanArray.map(x=>x.Eligibility))].sort(d3.ascending); 
-		indexOfVariables.push([eligibility, "People served", "Eligibility"]);
+		eligibilityArray = ['18 and under', 'TPS students', 'Clients', 'No known restrictions'];
+		indexOfVariables.push([eligibilityArray, "People served", "Eligibility"]);
 		
 	setUpClickers();
 	
@@ -701,4 +705,5 @@ function pullUniques(){
   
 
 </body>
+</html>
 </html>
