@@ -18,6 +18,22 @@ h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;co
 #clearall2{float:right;cursor:pointer; padding-left: 4px; padding-right:4px;}
 	a {font-family:"latobold"; color:#0033cc; text-decoration:none;} 
 
+
+.loader {
+  border: 5px solid #eee; 
+  border-bottom: 5px solid #72c4fa;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1.5s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 ul {list-style-type:none;font-size:90%;padding-top:0;margin-left:0; padding-left:0;}
 li {line-height:1.5em;list-style-type:none}
 
