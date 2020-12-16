@@ -496,6 +496,7 @@ function buildMap(data, calledbysearch) {
 	dotGroup.on('click', function(e) {markerClick(e)});
 	bounds = dotGroup.getBounds();
 	mappie.fitBounds(bounds);
+	mappie.setView([40.220028,-74.766263],13);
 }
 
 function addDays() {
@@ -710,7 +711,7 @@ function pullUniques(){
 <script type="text/javascript">
 $(document).ready(function() { $(function() {
 $('#mapclose').click();
-mappie.setView([40.220028,-74.766263],13); });
+}); 
 });
 </script> 
 
