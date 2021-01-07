@@ -1,8 +1,8 @@
-h1 {font-family:"latobold"; font-size: 150%; color:#106da8;}
-h2 {font-family:"latolight", Courier, sans-serif;font-size:130%;color:#106da8;}
-h3 {font-family:"latobold", sans-serif; font-size:110%;color:#106da8;}
-h4 {font-family:"latobold", sans-serif;color:#106da8;}
-h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;color:#106da8;}
+#page-wrap h1 {font-family:"latobold"; font-size: 150%; color:#106da8;}
+#page-wrap h2 {font-family:"latolight", Courier, sans-serif;font-size:130%;color:#106da8;}
+#page-wrap h3 {font-family:"latobold", sans-serif; font-size:110%;color:#106da8;}
+#page-wrap h4 {font-family:"latobold", sans-serif;color:#106da8;}
+#page-wrap h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;color:#106da8;}
 #mapid {width:100%; height: 350px; padding:0;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;}
 .headerImage {float:right; padding-left:20px;height:60px}
 #titlebar {padding:20px;height:auto;}
@@ -75,8 +75,9 @@ li {line-height:1.5em;list-style-type:none}
 
 .subhead {margin-top:-10px;}
 
+#page-wrap {padding-left:20px;padding-right:20px;}
 
-body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:20px;padding-right:20px;background-color:#fff}
+body {font-family:"latoregular"; font-size:15px; line-height:1.6;background-color:#fff}
 
 .toggle-button { background-color:#fff; font-family:"latoregular";border: solid 1px #106da8; border-radius:5px;}
 .toggle-button {text-transform:uppercase;padding:4px;font-size:110%;margin-bottom:10px;color:#106da8;border solid 1px #106da8;}
@@ -115,10 +116,10 @@ body {font-family:"latoregular"; font-size:15px; line-height:1.6; padding-left:2
 	
 	#searchbar{margin-bottom:10px; padding-bottom:10px;width:100%}
 	.selectorclass {float:left; padding:10px;color:#106da8;width:100%};	
-	h1{font-size:130%}
-	h2{font-size:120%}
-	h3{font-size:110%}
-	h4{font-size:105%}
+	#page-wrap h1{font-size:130%}
+	#page-wrap h2{font-size:120%}
+	#page-wrap h3{font-size:110%}
+	#page-wrap h4{font-size:105%}
 	body {font-size:90%}
 	.headerPic{width:70px}
 	.headerImage{display:none;}
