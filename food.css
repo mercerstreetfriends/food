@@ -3,6 +3,7 @@
 #page-wrap h3 {font-family:"latobold", sans-serif; font-size:1.2rem;color:#106da8;margin-bottom:0;}
 #page-wrap h4 {font-family:"latobold", sans-serif; font-size:1.1rem;color:#106da8;margin-bottom:0;}
 #page-wrap h5 {font-family:"latoregular", font-size:1rem; font-weight:normal; sans-serif;color:#106da8;margin-bottom:0;}
+#page-wrap label {font-size: .9rem; margin: 0 5px; vertical-align: text-bottom;}
 #mapid {width:100%; height: 350px; padding:0;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;margin-bottom:0;}
 .headerImage {float:right; padding-left:20px;height:60px}
 #titlebar {padding:20px;height:auto;}
