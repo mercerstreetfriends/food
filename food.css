@@ -1,9 +1,9 @@
-#page-wrap h1 {font-family:"latobold"; font-size: 150%; color:#106da8;}
-#page-wrap h2 {font-family:"latolight", Courier, sans-serif;font-size:130%;color:#106da8;}
-#page-wrap h3 {font-family:"latobold", sans-serif; font-size:120%;color:#106da8;}
-#page-wrap h4 {font-family:"latobold", sans-serif; font-size:110%;color:#106da8;}
-#page-wrap h5 {font-family:"latoregular", font-size:100%; font-weight:normal; sans-serif;color:#106da8;}
-#mapid {width:100%; height: 350px; padding:0;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;}
+#page-wrap h1 {font-family:"latobold"; font-size: 1.5rem; color:#106da8;margin-bottom:0;}
+#page-wrap h2 {font-family:"latolight", Courier, sans-serif;font-size:1.3rem;color:#106da8;margin-bottom:0;}
+#page-wrap h3 {font-family:"latobold", sans-serif; font-size:1.2rem;color:#106da8;margin-bottom:0;}
+#page-wrap h4 {font-family:"latobold", sans-serif; font-size:1.1rem;color:#106da8;margin-bottom:0;}
+#page-wrap h5 {font-family:"latoregular", font-size:1rem; font-weight:normal; sans-serif;color:#106da8;margin-bottom:0;}
+#mapid {width:100%; height: 350px; padding:0;border: solid 1px #ddd;border-radius:5px;margin-bottom:20px;margin-bottom:0;}
 .headerImage {float:right; padding-left:20px;height:60px}
 #titlebar {padding:20px;height:auto;}
 #menubar {margin-top:20px;border-top: solid 1px #7abcd1; padding:5px 20px 5px 20px;}
@@ -55,7 +55,7 @@ li {line-height:1.5em;list-style-type:none}
 .siteFlag {padding:4px; font-family:'latobold'; float:right; line-height:110%; background-color:#fe019a; color:#fff;z-index:999;border-radius:3px;}
 .siteDot {float:right;width:15px; height:15px; background-color:#fe019a; border-radius:15px;display:none}
 
-.sitePod {height:auto; width:75%; margin-left:15%; margin-right:15%; padding-bottom:15px; border-bottom:solid 1px #7abcd1;}
+.sitePod {height:auto; width:75%; margin:30px auto 20px; padding-bottom:15px; border-bottom:solid 1px #7abcd1;}
 .sitePic {width:300px; padding:20px;}
 .siteDesc {padding:10px;width:90%;margin-top:-20px;}
 
